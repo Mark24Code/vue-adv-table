@@ -1,7 +1,7 @@
-import Hello from './components/Hello'
+import AdvTable from './components/AdvTable'
 
-Hello.install = function(Vue) {
-  Vue.component(Hello.name, Hello)
+AdvTable.install = function(Vue) {
+  Vue.component(AdvTable.name, AdvTable)
 }
 
-export default Hello
+export default AdvTable

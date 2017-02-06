@@ -18,7 +18,12 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('adv-table.js')
+    filename: utils.assetsPath('adv-table.js'),
+    library: 'AdvTable',
+    libraryTarget: 'umd'
+  },
+  externals: {
+    vue: 'vue'
   },
   vue: {
     loaders: utils.cssLoaders({
@@ -31,11 +36,11 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     // extract css into its own file
     new ExtractTextPlugin(utils.assetsPath('adv-table.css')),

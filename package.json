@@ -1,13 +1,10 @@
 {
   "name": "vue-adv-table",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "vue2.0 DataTables, based on element-ui, el-table + el-pagination + custom filter and sort",
   "author": "Mark24 <mark.zhangyoung@qq.com>",
-  "private": true,
-  "main": {
-    "adv-table":"dist/adv-tables.js",
-    "adv-table-css":"dist/adv-tables.css"
-  },
+  "private": false,
+  "main":"./dist/adv-table.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
