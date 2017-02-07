@@ -9,9 +9,12 @@
     </div>
 </template>
 <script>
-// import AdvTable from '../src/components/AdvTable'
-import '../dist/adv-table.css'
-import AdvTable from '../dist/adv-table.js'
+import AdvTable from '../src/components/AdvTable'
+
+// // dev
+// import '../dist/adv-table.css'
+// import AdvTable from '../dist/adv-table.js'
+
 export default {
     name: 'app',
     components: {

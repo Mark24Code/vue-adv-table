@@ -23,7 +23,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     libraryTarget: 'umd'
   },
   externals: {
-    vue: 'vue'
+    "vue": "vue",
+    "element-ui":"element-ui"
   },
   vue: {
     loaders: utils.cssLoaders({

@@ -1,4 +1,6 @@
 <template>
+<div class="adv-table-wrap">
+
    <el-table
       class="adv-table"
       :data="curTableData"
@@ -27,6 +29,19 @@
         </div>
       </el-table-column>
     </el-table>
+    <div class="pagination-wrap">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        layout="total,sizes,prev,pager,next,jumper"
+        :total="400"
+      >
+      </el-pagination>
+    </div>
+</div>
 </template>
 
 <script>
@@ -40,7 +55,7 @@ export default {
   name: 'AdvTable',
   data () {
     return {
-
+      currentPage:1
     }
   },
   props:{
@@ -56,7 +71,17 @@ export default {
         return []
       }
     },
-    actionColWidth: String
+    actionColWidth: String,
+    pageSizes:{
+      type:Array,
+      default(){
+        return [20,50,100,150,200]
+      }
+    },
+    pageSize:{
+      type:Number,
+      default:20
+    }
   },
   computed:{
     tableData(){
@@ -66,6 +91,14 @@ export default {
     curTableData(){
       return this.tableData
     }
+  },
+  methods:{
+    handleSizeChange(val){
+      console.log("每页 ${"+val+"} 条");
+    },
+    handleCurrentChange(currentPage){
+      console.log("当前页 ${"+currentPage+"} 条");
+    }
   }
 }
 </script>
@@ -73,5 +106,9 @@ export default {
 <style scoped>
 .actionBtn{
   margin: 0 5px;
+}
+.pagination-wrap{
+  text-align: right;
+  margin: 10px 0;
 }
 </style>
