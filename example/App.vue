@@ -1,44 +1,39 @@
 <template>
     <div id="app">
         <img src="./assets/logo.png">
-        <AdvTable :data='tableData' :row-actions-def="rowActionsDef">
-            <el-table-column label="姓名" prop="name"></el-table-column>
-            <el-table-column label="日期" prop="date"></el-table-column>
-            <el-table-column label="地址" prop="address"></el-table-column>
+        <AdvTable
+            :data="tableData"
+            :row-actions-def="rowActionsDef"
+            :pageSizes="[10,20,30]"
+        >
+            <el-table-column label="序号" prop="sn"></el-table-column>
+            <el-table-column label="工厂" prop="fname"></el-table-column>
+            <el-table-column label="日期" prop="factory_date"></el-table-column>
         </AdvTable>
     </div>
 </template>
 <script>
-import AdvTable from '../src/components/AdvTable'
-
 // // dev
+import AdvTable from '../src/components/AdvTable'
+// // test
 // import '../dist/adv-table.css'
 // import AdvTable from '../dist/adv-table.js'
+
+import mockData from './mock.js'
 
 export default {
     name: 'app',
     components: {
         AdvTable
     },
+    created(){
+        for(var i=0;i<100;i++){
+            this.tableData = this.tableData.concat(mockData.list)
+        }
+    },
     data() {
         return {
-            tableData: [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }],
+            tableData: [],
             rowActionsDef: this.getRowActionsDef(),
 
         }

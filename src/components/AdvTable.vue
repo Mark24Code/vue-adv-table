@@ -35,9 +35,9 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage"
         :page-sizes="pageSizes"
-        :page-size="pageSize"
+        :page-size="internalPageSize"
         layout="total,sizes,prev,pager,next,jumper"
-        :total="400"
+        :total="total"
       >
       </el-pagination>
     </div>
@@ -55,7 +55,8 @@ export default {
   name: 'AdvTable',
   data () {
     return {
-      currentPage:1
+      currentPage:1,
+      internalPageSize:this.pageSizes[0]
     }
   },
   props:{
@@ -71,16 +72,17 @@ export default {
         return []
       }
     },
-    actionColWidth: String,
+    actionColWidth:{
+      type:String,
+      default(){
+        return ""
+      }
+    },
     pageSizes:{
       type:Array,
       default(){
-        return [20,50,100,150,200]
+        return [10,20,50]
       }
-    },
-    pageSize:{
-      type:Number,
-      default:20
     }
   },
   computed:{
@@ -89,16 +91,24 @@ export default {
       return newData
     },
     curTableData(){
-      return this.tableData
+      let from = this.internalPageSize*(this.currentPage-1)
+      let to = from + this.internalPageSize
+      return this.tableData.slice(from ,to)
+    },
+    total(){
+      return this.tableData.length
     }
   },
   methods:{
-    handleSizeChange(val){
-      console.log("每页 ${"+val+"} 条");
+    handleSizeChange(size){
+      this.internalPageSize = size
     },
     handleCurrentChange(currentPage){
-      console.log("当前页 ${"+currentPage+"} 条");
+      this.currentPage = currentPage
     }
+  },
+  watch:{
+
   }
 }
 </script>
