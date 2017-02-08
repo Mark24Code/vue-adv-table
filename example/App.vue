@@ -6,6 +6,7 @@
             :rowActionsDef="rowActionsDef"
             :pageSizes="[10,20,30]"
             :selectModel="true"
+            :toolBarDef="toolBarDef"
         >
             <el-table-column label="序号" prop="sn" sortable="custom" ></el-table-column>
             <el-table-column label="工厂" prop="fname" sortable="custom" ></el-table-column>
@@ -36,6 +37,7 @@ export default {
         return {
             tableData: [],
             rowActionsDef: this.getRowActionsDef(),
+            toolBarDef:this.getToolBarDef()
 
         }
     },
@@ -59,6 +61,42 @@ export default {
                 }
 
             }]
+        },
+        getToolBarDef(){
+            let self = this
+            let actions = [{
+                name:"新建",
+                icon:"plus",
+                handler(){
+                    self.$message("新建clicked")
+                }
+            },{
+                name:"删除",
+                icon:"delete",
+                handler(){
+                    self.$message("删除clicked")
+                }
+            },{
+                name:"暂停",
+                icon:"time",
+                handler(){
+                    self.$message("暂停clicked")
+                }
+            }]
+
+            return {
+                actions:{
+                    width:8,
+                    def:actions
+                },
+                filters:{
+                    prop:null
+                },
+                search:{
+                    width:4,
+                    offset:12
+                }
+            }
         }
     }
 }

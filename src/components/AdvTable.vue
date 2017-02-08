@@ -1,6 +1,26 @@
 <template>
 <div class="adv-table-wrap">
-
+  <el-row class="tool-bar">
+    <el-col
+      class="action-btn-col"
+      :span="toolBarDef.actions.width"
+    >
+      <ActionBar
+        :actions="toolBarDef.actions.def"
+      ></ActionBar>
+    </el-col>
+    <el-col
+      class="search-col"
+      v-if="toolBarDef.search"
+      :span="toolBarDef.search.width"
+      :offset="toolBarDef.search.offset"
+    >
+       <el-input
+          icon="search"
+          v-model="searchKey"
+      ></el-input>
+    </el-col>
+  </el-row>
    <el-table
       class="adv-table"
       border
@@ -60,8 +80,9 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-
 Vue.use(ElementUI)
+
+import ActionBar from './ActionBar'
 
 export default {
   name: 'AdvTable',
@@ -71,8 +92,12 @@ export default {
       internalPageSize:this.pageSizes[0],
       sortObj:{},
       multipleSelection:[],
-      actionModel:false
+      actionModel:false,
+      searchKey:""
     }
+  },
+  components:{
+    ActionBar
   },
   props:{
     data: {
@@ -110,11 +135,35 @@ export default {
       default(){
         return false
       }
+    },
+    toolBarDef:{
+      type:Object,
+      default(){
+        return {}
+      }
     }
   },
   computed:{
     tableData(){
       let newData = this.data
+
+      //search filter
+      this.filters.forEach((filter)=>{
+        if(!filter.value){
+          return true
+        }
+
+        if(filter.property){
+
+        }else{
+          //fuzzy search
+          newData = newData.filter(el=>{
+            return Object.keys(el).some((key)=>{
+              return String(el[key]).indexOf(filter.value)>-1
+            })
+          })
+        }
+      })
 
       //sort data
       if(this.sortObj.order){
@@ -144,6 +193,17 @@ export default {
     },
     total(){
       return this.tableData.length
+    },
+    filters(){
+      let filters = [{
+        value:this.searchKey
+      }]
+
+      let prop = this.toolBarDef.filters && this.toolBarDef.filters.prop
+      if(prop){
+
+      }
+      return filters
     }
   },
   methods:{
@@ -178,11 +238,17 @@ export default {
 </script>
 
 <style scoped>
+.tool-bar{
+  margin: 10px 0;
+}
 .actionBtn{
   margin: 0 5px;
 }
 .pagination-wrap{
   text-align: right;
   margin: 10px 0;
+}
+.action-btn-col{
+  text-align: left;
 }
 </style>
