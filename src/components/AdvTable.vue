@@ -3,17 +3,29 @@
 
    <el-table
       class="adv-table"
-      :data="curTableData"
       border
       fit
       stripe
-      style="width: 100%">
+      style="width: 100%"
+      :data="curTableData"
+      @sort-change="handleSort"
+      :default-sort = "defaultSort"
+      @selection-change="handleSelectionChange"
+  >
+      <el-table-column
+        v-if="selectModel"
+        type="selection"
+        width="55">
+      </el-table-column>
+
       <slot></slot>
+
       <el-table-column
         label="操作"
         prop= "innerRowActions"
         :min-width="actionColWidth"
         inline-template
+        v-if="actionModel"
       >
         <div class="action-list">
           <span v-for="action in rowActionsDef">
@@ -56,7 +68,10 @@ export default {
   data () {
     return {
       currentPage:1,
-      internalPageSize:this.pageSizes[0]
+      internalPageSize:this.pageSizes[0],
+      sortObj:{},
+      multipleSelection:[],
+      actionModel:false
     }
   },
   props:{
@@ -83,11 +98,43 @@ export default {
       default(){
         return [10,20,50]
       }
+    },
+    defaultSort:{
+      type:Object,
+      default(){
+        return {prop: null, order: null}//:defaultSort="{prop: 'sn', order: 'ascending'}"
+      }
+    },
+    selectModel:{
+      type:Boolean,
+      default(){
+        return false
+      }
     }
   },
   computed:{
     tableData(){
       let newData = this.data
+
+      //sort data
+      if(this.sortObj.order){
+        let order = this.sortObj.order
+        let prop = this.sortObj.prop
+        let isDescending = !!(order === 'descending')
+        newData.sort(function(a,b){
+          if(a[prop]>b[prop]){
+            return 1
+          }else if(a[prop] < b[prop]){
+            return -1
+          }else{
+            return 0
+          }
+        })
+        if(isDescending){
+          newData.reverse()
+        }
+
+      }
       return newData
     },
     curTableData(){
@@ -105,10 +152,27 @@ export default {
     },
     handleCurrentChange(currentPage){
       this.currentPage = currentPage
+    },
+    handleSort(sortObj){
+      this.sortObj = sortObj
+    },
+    handleSelectionChange(multiSelect){
+       this.multipleSelection = multiSelect;
+       console.log(this.multipleSelection)
     }
   },
   watch:{
-
+    rowActionsDef:{
+      immediate:true,
+      handler(val){
+        let self = this
+        if(val.length>0){
+          self.actionModel = true
+        }else{
+          self.actionModel = false
+        }
+      }
+    }
   }
 }
 </script>

@@ -3,12 +3,13 @@
         <img src="./assets/logo.png">
         <AdvTable
             :data="tableData"
-            :row-actions-def="rowActionsDef"
+            :rowActionsDef="rowActionsDef"
             :pageSizes="[10,20,30]"
+            :selectModel="true"
         >
-            <el-table-column label="序号" prop="sn"></el-table-column>
-            <el-table-column label="工厂" prop="fname"></el-table-column>
-            <el-table-column label="日期" prop="factory_date"></el-table-column>
+            <el-table-column label="序号" prop="sn" sortable="custom" ></el-table-column>
+            <el-table-column label="工厂" prop="fname" sortable="custom" ></el-table-column>
+            <el-table-column label="日期" prop="factory_date" sortable="custom"></el-table-column>
         </AdvTable>
     </div>
 </template>
