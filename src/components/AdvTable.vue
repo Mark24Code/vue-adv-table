@@ -151,10 +151,6 @@ export default {
       this.filters.forEach((filter)=>{
         if(!filter.value){
           return true
-        }
-
-        if(filter.property){
-
         }else{
           //fuzzy search
           newData = newData.filter(el=>{
@@ -199,10 +195,6 @@ export default {
         value:this.searchKey
       }]
 
-      let prop = this.toolBarDef.filters && this.toolBarDef.filters.prop
-      if(prop){
-
-      }
       return filters
     }
   },

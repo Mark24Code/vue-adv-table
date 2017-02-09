@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-        <img src="./assets/logo.png">
         <AdvTable
             :data="tableData"
             :rowActionsDef="rowActionsDef"
@@ -89,9 +88,6 @@ export default {
                     width:8,
                     def:actions
                 },
-                filters:{
-                    prop:null
-                },
                 search:{
                     width:4,
                     offset:12
@@ -106,8 +102,5 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
 }
 </style>
