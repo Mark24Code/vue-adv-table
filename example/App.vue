@@ -15,10 +15,10 @@
 </template>
 <script>
 // // dev
-import AdvTable from '../src/components/AdvTable'
-// // test
-// import '../dist/adv-table.css'
-// import AdvTable from '../dist/adv-table.js'
+// import AdvTable from '../src/components/AdvTable'
+// test
+import '../dist/adv-table.css'
+import AdvTable from '../dist/adv-table.js'
 
 import mockData from './mock.js'
 
