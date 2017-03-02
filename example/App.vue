@@ -21,7 +21,6 @@ import '../dist/adv-table.css'
 import AdvTable from '../dist/adv-table.js'
 
 import mockData from './mock.js'
-import 'font-awesome/css/font-awesome.min.css'
 
 export default {
     name: 'app',
@@ -35,6 +34,7 @@ export default {
     },
     data() {
         return {
+            multiSelect:[],
             tableData: [],
             rowActionsDef: this.getRowActionsDef(),
             toolBarDef:this.getToolBarDef()
@@ -66,8 +66,8 @@ export default {
             let self = this
             let actions = [{
                 name:"新建",
-                // icon:"plus",
-                icon_html:'<i class="fa fa-id-card-o" aria-hidden="true"></i>',
+                icon:"plus",
+                // icon_html:'<i class="fa fa-id-card-o" aria-hidden="true"></i>',
                 handler(){
                     self.$message("新建clicked")
                 }
@@ -85,6 +85,11 @@ export default {
                 }
             }]
 
+            let multiSelectChange = (multipleSelection)=>{
+                console.log(multipleSelection)
+                self.multiSelect=multipleSelection
+            }
+
             return {
                 actions:{
                     width:8,
@@ -93,6 +98,9 @@ export default {
                 search:{
                     width:4,
                     offset:12
+                },
+                multiSelect:{
+                    def:multiSelectChange
                 }
             }
         }

@@ -210,7 +210,9 @@ export default {
     },
     handleSelectionChange(multiSelect){
        this.multipleSelection = multiSelect;
-       console.log(this.multipleSelection)
+       if(this.toolBarDef.multiSelect.def !== undefined){
+        this.toolBarDef.multiSelect.def(this.multipleSelection)
+       }
     }
   },
   watch:{
