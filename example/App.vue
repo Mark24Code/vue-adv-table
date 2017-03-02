@@ -21,6 +21,7 @@ import '../dist/adv-table.css'
 import AdvTable from '../dist/adv-table.js'
 
 import mockData from './mock.js'
+import 'font-awesome/css/font-awesome.min.css'
 
 export default {
     name: 'app',
@@ -65,7 +66,8 @@ export default {
             let self = this
             let actions = [{
                 name:"新建",
-                icon:"plus",
+                // icon:"plus",
+                icon_html:'<i class="fa fa-id-card-o" aria-hidden="true"></i>',
                 handler(){
                     self.$message("新建clicked")
                 }

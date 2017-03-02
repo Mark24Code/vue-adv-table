@@ -5,7 +5,7 @@
             v-for="action in actions"
             @click = "action.handler"
             :icon = "action.icon"
-        >{{action.name}}</el-button>
+        ><span class="icon_html" v-html="action.icon_html"></span>{{action.name}}</el-button>
     </div>
 </template>
 <script >
@@ -20,3 +20,8 @@
         }
     }
 </script>
+<style scoped>
+.icon_html{
+  margin: 0 5px 0 0;
+}
+</style>
