@@ -13,7 +13,6 @@
       class="search-col"
       v-if="toolBarDef.search"
       :span="toolBarDef.search.width"
-      :offset="toolBarDef.search.offset"
     >
        <el-input
           icon="search"
@@ -244,5 +243,8 @@ export default {
 }
 .action-btn-col{
   text-align: left;
+}
+.search-col{
+  float: right;
 }
 </style>

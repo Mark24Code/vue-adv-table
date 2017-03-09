@@ -905,8 +905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  })], 1), _vm._v(" "), (_vm.toolBarDef.search) ? _c('el-col', {
 	    staticClass: "search-col",
 	    attrs: {
-	      "span": _vm.toolBarDef.search.width,
-	      "offset": _vm.toolBarDef.search.offset
+	      "span": _vm.toolBarDef.search.width
 	    }
 	  }, [_c('el-input', {
 	    attrs: {

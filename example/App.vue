@@ -96,8 +96,7 @@ export default {
                     def:actions
                 },
                 search:{
-                    width:4,
-                    offset:12
+                    width:4
                 },
                 multiSelect:{
                     def:multiSelectChange
